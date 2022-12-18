@@ -1,1 +1,1 @@
-// index for Object List Panel
+export { default } from './ObjectListPanel';
