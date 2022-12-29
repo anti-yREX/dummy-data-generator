@@ -1,1 +1,1 @@
-// index for Properties Form
+export { default } from './PropertiesForm';

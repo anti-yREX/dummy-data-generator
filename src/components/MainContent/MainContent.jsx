@@ -1,12 +1,13 @@
 import React from "react";
 import MainContentWrapper from './MainContent.styles';
 import ObjectListPanel from "../ObjectListPanel";
+import PropertiesForm from "../PropertiesForm";
 
 const MainContent = () => {
     return (
         <MainContentWrapper>
             <ObjectListPanel />
-            <div>Properties Form</div>
+            <PropertiesForm />
         </MainContentWrapper>
     );
 }

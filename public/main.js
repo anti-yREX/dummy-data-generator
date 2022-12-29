@@ -1127,7 +1127,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _MainContent_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainContent.styles */ \"./src/components/MainContent/MainContent.styles.js\");\n/* harmony import */ var _ObjectListPanel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ObjectListPanel */ \"./src/components/ObjectListPanel/index.js\");\n\n\n\nvar MainContent = function MainContent() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_MainContent_styles__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ObjectListPanel__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, \"Properties Form\"));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainContent);\n\n//# sourceURL=webpack://dummy-data-generator/./src/components/MainContent/MainContent.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _MainContent_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainContent.styles */ \"./src/components/MainContent/MainContent.styles.js\");\n/* harmony import */ var _ObjectListPanel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ObjectListPanel */ \"./src/components/ObjectListPanel/index.js\");\n/* harmony import */ var _PropertiesForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PropertiesForm */ \"./src/components/PropertiesForm/index.js\");\n\n\n\n\nvar MainContent = function MainContent() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_MainContent_styles__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ObjectListPanel__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PropertiesForm__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainContent);\n\n//# sourceURL=webpack://dummy-data-generator/./src/components/MainContent/MainContent.jsx?");
 
 /***/ }),
 
@@ -1183,6 +1183,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* reexport safe */ _ObjectListPanel__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _ObjectListPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ObjectListPanel */ \"./src/components/ObjectListPanel/ObjectListPanel.jsx\");\n\n\n//# sourceURL=webpack://dummy-data-generator/./src/components/ObjectListPanel/index.js?");
+
+/***/ }),
+
+/***/ "./src/components/PropertiesForm/PropertiesForm.jsx":
+/*!**********************************************************!*\
+  !*** ./src/components/PropertiesForm/PropertiesForm.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _PropertiesForm_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PropertiesForm.styles */ \"./src/components/PropertiesForm/PropertiesForm.styles.js\");\n\n\n\nvar ObjectListPanel = function ObjectListPanel() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PropertiesForm_styles__WEBPACK_IMPORTED_MODULE_1__.Container, null);\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ObjectListPanel);\n\n//# sourceURL=webpack://dummy-data-generator/./src/components/PropertiesForm/PropertiesForm.jsx?");
+
+/***/ }),
+
+/***/ "./src/components/PropertiesForm/PropertiesForm.styles.js":
+/*!****************************************************************!*\
+  !*** ./src/components/PropertiesForm/PropertiesForm.styles.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"ButtonWrapper\": () => (/* binding */ ButtonWrapper),\n/* harmony export */   \"Container\": () => (/* binding */ Container),\n/* harmony export */   \"StyledIconButton\": () => (/* binding */ StyledIconButton)\n/* harmony export */ });\n/* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ \"./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js\");\n/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ \"./node_modules/@mui/material/IconButton/IconButton.js\");\n/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/system */ \"./node_modules/@mui/system/esm/styled.js\");\n\nvar _templateObject, _templateObject2;\n\n\n\nvar Container = styled_components__WEBPACK_IMPORTED_MODULE_1__[\"default\"].div(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__[\"default\"])([\"\\n    border-radius: 16px;\\n    border: 4px solid black;\\n    width: 30vw;\\n    background: white;\\n    box-shadow: 0px 0px 22px grey;\\n\"])));\nvar ButtonWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1__[\"default\"].div(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__[\"default\"])([\"\\n    display: flex;\\n    padding-bottom: 4px;\\n\"])));\nvar StyledIconButton = (0,_mui_system__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(_mui_material__WEBPACK_IMPORTED_MODULE_3__[\"default\"])({\n  color: 'black'\n});\n\n\n//# sourceURL=webpack://dummy-data-generator/./src/components/PropertiesForm/PropertiesForm.styles.js?");
+
+/***/ }),
+
+/***/ "./src/components/PropertiesForm/index.js":
+/*!************************************************!*\
+  !*** ./src/components/PropertiesForm/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* reexport safe */ _PropertiesForm__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _PropertiesForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PropertiesForm */ \"./src/components/PropertiesForm/PropertiesForm.jsx\");\n\n\n//# sourceURL=webpack://dummy-data-generator/./src/components/PropertiesForm/index.js?");
 
 /***/ }),
 
