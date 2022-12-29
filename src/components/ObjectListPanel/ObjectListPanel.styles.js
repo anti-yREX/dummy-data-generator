@@ -3,7 +3,6 @@ import { IconButton } from '@mui/material';
 import { styled as muiStyled } from '@mui/system';
 
 const Container = styled.div`
-    margin-right: 8vw;
     border-radius: 16px;
     border: 4px solid black;
     width: 30vw;
