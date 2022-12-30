@@ -1,5 +1,4 @@
 import React from "react";
-import NewKeyField from "../NewKeyField";
 import { useSelector } from "react-redux";
 
 const KeysList = () => {
@@ -7,7 +6,7 @@ const KeysList = () => {
     return (
         <div>
             List
-            {showNewField && (<NewKeyField />)}
+            {showNewField && (<div>NewKeyField</div>)}
         </div>
     )
 }

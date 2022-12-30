@@ -15,7 +15,9 @@ const ObjectListPanel = () => {
     return (
         <Wrapper>
             <ButtonWrapper>
-                <StyledIconButton onClick={() => dispatch(setNewKeyFieldShow(true))}>
+                <StyledIconButton
+                    onClick={() => dispatch(setNewKeyFieldShow(true))}
+                >
                     <Add />
                 </StyledIconButton>
                 <StyledIconButton disabled >
