@@ -5,7 +5,11 @@ export const parentObjectSlice = createSlice({
     initialState: {},
     reducers: {
         setParentObjectData: (state, action) => {
-            state = action.payload;
+            console.log(state, action);
+            return {
+                ...state,
+                ...action.payload,
+            };
         }
     },
 });
