@@ -1,12 +1,16 @@
 import React from "react";
-import MainContent from "./components/MainContent"; 
+import { Provider } from 'react-redux'
+import MainContent from "./components/MainContent";
+import store from './services/reduxStore/store';
 
 // This component will contain all Provider Wrappers like:
-// for ThemeProvoder, Redux, etc.
+// for ThemeProvoder, Redux-Provider, etc.
 
 const App = () => {
     return (
-        <MainContent />
+        <Provider store={store}>
+            <MainContent />
+        </Provider>
     );
 }
 

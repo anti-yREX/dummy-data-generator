@@ -1,30 +1,37 @@
 import React from 'react';
+import { Add, Delete, Redo, Undo } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { setNewKeyFieldShow } from '../../services/reduxStore/NewKeyFieldReducer';
 import {
+    Wrapper,
     Container,
     ButtonWrapper,
     StyledIconButton,
 } from './ObjectListPanel.styles';
-import { Add, Delete, Redo, Undo } from '@mui/icons-material';
+import KeysList from './components/KeysList/KeysList';
 
 const ObjectListPanel = () => {
+    const dispatch = useDispatch();
     return (
-        <div>
+        <Wrapper>
             <ButtonWrapper>
-                <StyledIconButton>
+                <StyledIconButton onClick={() => dispatch(setNewKeyFieldShow(true))}>
                     <Add />
                 </StyledIconButton>
                 <StyledIconButton disabled >
                     <Delete />
                 </StyledIconButton>
-                <StyledIconButton disabled >
+                <StyledIconButton className='right-side' disabled >
                     <Undo />
                 </StyledIconButton>
                 <StyledIconButton disabled >
                     <Redo />
                 </StyledIconButton>
             </ButtonWrapper>
-            <Container />
-        </div>
+            <Container>
+                <KeysList />
+            </Container>
+        </Wrapper>
     );
 }
 
