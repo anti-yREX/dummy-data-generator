@@ -10,6 +10,7 @@ const Container = styled.div`
     box-shadow: 0px 0px 22px grey;
     height: calc(100% - 44px);
     padding: 24px 0;
+    overflow: hidden;
 `;
 
 const ButtonWrapper = styled.div`

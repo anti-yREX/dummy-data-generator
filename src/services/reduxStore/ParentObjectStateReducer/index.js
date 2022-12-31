@@ -2,7 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const parentObjectSlice = createSlice({
     name: 'parentObject',
-    initialState: {},
+    initialState: {
+        a: {
+            children: {
+                b: {
+                    msg: 'yey',
+                },
+            }
+        }
+    },
     reducers: {
         setParentObjectData: (state, action) => {
             console.log(state, action);
@@ -14,7 +22,6 @@ export const parentObjectSlice = createSlice({
     },
 });
 
-// Action creators are generated for each case reducer function
 export const { setParentObjectData } = parentObjectSlice.actions;
 
 export default parentObjectSlice.reducer;

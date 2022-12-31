@@ -12,7 +12,6 @@ export const newKeyFieldSlice = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
 export const { setNewKeyFieldShow } = newKeyFieldSlice.actions;
 
 export default newKeyFieldSlice.reducer;

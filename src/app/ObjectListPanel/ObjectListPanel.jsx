@@ -23,7 +23,7 @@ const ObjectListPanel = () => {
                 <StyledIconButton disabled >
                     <Delete />
                 </StyledIconButton>
-                <StyledIconButton className='right-side' disabled >
+                <StyledIconButton className="right-side" disabled >
                     <Undo />
                 </StyledIconButton>
                 <StyledIconButton disabled >
