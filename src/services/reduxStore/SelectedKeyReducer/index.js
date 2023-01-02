@@ -3,8 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const selectedKeySlice = createSlice({
     name: 'selectedKey',
     initialState: {
-        keyName: 'h',
-        path: ['a', 'f', 'h'],
+        path: [],
     },
     reducers: {
         setSelectedKey: (state, action) => {

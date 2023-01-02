@@ -39,6 +39,7 @@ const KeysList = () => {
                     setParentObjectData({
                         ...parentObject,
                         [event.target.value]: {
+                            keyName: event.target.value,
                             path: [event.target.value],
                             type: Types.empty,
                             isEmpty: true,

@@ -54,6 +54,12 @@ export const parentObjectSlice = createSlice({
             path: ['e'],
             type: 'uuid',
         },
+        j: {
+            keyName: 'j',
+            path: ['j'],
+            type: 'object',
+            children: {},
+        },
     },
     reducers: {
         setParentObjectData: (state, action) => {

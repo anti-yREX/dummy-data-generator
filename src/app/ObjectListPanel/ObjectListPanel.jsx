@@ -1,7 +1,8 @@
 import React from 'react';
 import { Add, Delete, Redo, Undo } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setNewKeyFieldShow } from '../../services/reduxStore/NewKeyFieldReducer';
+import { setSelectedKey } from '../../services/reduxStore/SelectedKeyReducer';
 import {
     Wrapper,
     Container,
@@ -10,8 +11,22 @@ import {
 } from './ObjectListPanel.styles';
 import KeysList from './components/KeysList/KeysList';
 
+const objectListContainerId = 'object-list-container';
+
 const ObjectListPanel = () => {
+    const selectedKey = useSelector(
+        ({ selectedKey }) => (selectedKey)
+    );
     const dispatch = useDispatch();
+    const selected = selectedKey === null || selectedKey?.path?.length === 0;
+
+    const onClickHandler = (event) => {
+        if (event.target.id === objectListContainerId) {
+            dispatch(setSelectedKey({
+                path: [],
+            }));
+        }
+    }
     return (
         <Wrapper>
             <ButtonWrapper>
@@ -30,7 +45,11 @@ const ObjectListPanel = () => {
                     <Redo />
                 </StyledIconButton>
             </ButtonWrapper>
-            <Container>
+            <Container
+                className={selected && 'selected'}
+                onClick={onClickHandler}
+                id={objectListContainerId}
+            >
                 <KeysList />
             </Container>
         </Wrapper>
