@@ -4,10 +4,14 @@ export const newKeyFieldSlice = createSlice({
     name: 'newKeyFieldState',
     initialState: {
         show: false,
+        path: [],
     },
     reducers: {
         setNewKeyFieldShow: (state, action) => {
             state.show = action.payload;
+        },
+        setNewKeyFieldPath: (state, action) => {
+            state.path = action.payload;
         }
     },
 })

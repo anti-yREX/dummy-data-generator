@@ -1,14 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
     Container,
-    ButtonWrapper,
-    StyledIconButton,
 } from './PropertiesForm.styles';
-import { Add, Delete } from '@mui/icons-material';
 
 const ObjectListPanel = () => {
+    const selectedKey = useSelector(
+        ({ selectedKey }) => (selectedKey)
+    );
     return (
-        <Container />
+        <Container>
+            {JSON.stringify(selectedKey)}
+        </Container>
     );
 }
 
