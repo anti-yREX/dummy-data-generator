@@ -32,6 +32,7 @@ const LeafTypeItem = (props) => {
             onClick={() => onClickHandler()}
         >
             <ListItemText
+                sx={{ marginLeft: '16px' }}
                 primary={keyName}
             />
         </ListItemButton>
@@ -68,7 +69,7 @@ const NodeTypeItem = (props) => {
             >
                 <Icon
                     sx={{
-                        margin: '0 8px 0 -2px',
+                        margin: '0 8px 0 -14px',
                         transform: expanded ? '' : 'rotate(-90deg)',
                     }}
                 >
