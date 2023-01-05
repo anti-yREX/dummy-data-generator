@@ -5,12 +5,12 @@ import {
 } from './PropertiesForm.styles';
 
 const ObjectListPanel = () => {
-    const selectedKey = useSelector(
-        ({ selectedKey }) => (selectedKey)
+    const {selectedKey, newKeyFieldState} = useSelector(
+        ({ selectedKey, newKeyFieldState }) => ({selectedKey, newKeyFieldState})
     );
     return (
         <Container>
-            {JSON.stringify(selectedKey)}
+            {JSON.stringify({ selectedKey, newKeyFieldState })}
         </Container>
     );
 }

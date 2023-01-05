@@ -5,7 +5,6 @@ import { ListItemText as MuiListItemText } from "@mui/material";
 
 export const TextField = muiStyled(TextFieldComponent)({
     width: '100%',
-    height: '48px',
 });
 
 export const ListItemText = muiStyled(MuiListItemText)({

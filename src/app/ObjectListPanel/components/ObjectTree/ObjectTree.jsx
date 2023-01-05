@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon, List } from "@mui/material";
-import { ListItemText, ListItemButton } from './ObjectTree.styles';
+import {
+    TextField, ListItemText, ListItemButton,
+} from './ObjectTree.styles';
 import Types from '../../../../constants/PropertyTypes.enum';
 import { ArrowDropDown } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedKey } from '../../../../services/reduxStore/SelectedKeyReducer';
+import { setNewKeyFieldShow, setNewKeyFieldPath } from '../../../../services/reduxStore/NewKeyFieldReducer';
+import { setParentObjectData } from '../../../../services/reduxStore/ParentObjectStateReducer';
 
 const LeafTypeItem = (props) => {
     const { keyName } = props;
@@ -43,20 +47,65 @@ const NodeTypeItem = (props) => {
     const {
         keyName,
         children,
+        path,
     } = props;
+
+    const [showNewKeyError, setShowNewKeyError] = useState(false);
+
+    const onBlurHandler = (event) => {
+        const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
+
+        if (regex.test(event.target.value) && !parentObject[event.target.value]) {
+            // if (selectedKey && (selectedKey.type === 'object' || selectedKey.type === 'array')) {
+            //     const currentPath = selectedKey.path;
+            //     let lastObj = parentObject;
+            //     currentPath.forEach((current, index) => {
+            //         lastObj = lastObj[current].childern;
+            //     });
+            //     console.log(lastObj);
+            // } else {
+                dispatch(
+                    setParentObjectData({
+                        ...parentObject,
+                        [event.target.value]: {
+                            keyName: event.target.value,
+                            path: [event.target.value],
+                            type: Types.empty,
+                            isEmpty: true,
+                            children: {},
+                        },
+                    })
+                );
+            // }
+            dispatch(setNewKeyFieldShow(false));
+            setShowNewKeyError(false);
+        } else {
+            setShowNewKeyError(true);
+        }
+    };
 
     const dispatch = useDispatch();
 
-    const selectedKey = useSelector(({ selectedKey }) => (selectedKey));
+    const {selectedKey, newFieldPath, showNewField } = useSelector(({ selectedKey, newKeyFieldState }) => ({
+        selectedKey,
+        newFieldPath: newKeyFieldState.path,
+        showNewField: newKeyFieldState.show,
+    }));
     const expanded = selectedKey.path.includes(keyName);
 
     const onClickHandler = () => {
-        dispatch(setSelectedKey({
-            path: props.path,
-            keyName,
-        }));
+        dispatch(
+            setSelectedKey({
+                path: props.path,
+                keyName,
+            })
+        );
+        dispatch(
+            setNewKeyFieldPath(props.path)
+        );
     }
 
+    console.log({selectedKey, newFieldPath, showNewField });
 
     return (
         <>
@@ -95,6 +144,15 @@ const NodeTypeItem = (props) => {
                         {...children[current]}
                     />
                 ))}
+                {showNewField && (newFieldPath === path) && (
+                    <TextField
+                        placeholder="Add New Key Name"
+                        autoFocus
+                        onBlur={onBlurHandler}
+                        inputProps={{ maxLength: 50 }}
+                        error={showNewKeyError}
+                    />
+                )}
             </List>
         </>
     )

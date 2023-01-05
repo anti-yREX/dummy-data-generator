@@ -1,7 +1,7 @@
 import React from 'react';
 import { Add, Delete, Redo, Undo } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
-import { setNewKeyFieldShow } from '../../services/reduxStore/NewKeyFieldReducer';
+import { setNewKeyFieldShow, setNewKeyFieldPath } from '../../services/reduxStore/NewKeyFieldReducer';
 import { setSelectedKey } from '../../services/reduxStore/SelectedKeyReducer';
 import {
     Wrapper,
@@ -22,9 +22,14 @@ const ObjectListPanel = () => {
 
     const onClickHandler = (event) => {
         if (event.target.id === objectListContainerId) {
-            dispatch(setSelectedKey({
-                path: [],
-            }));
+            dispatch(
+                setSelectedKey({
+                    path: [],
+                })
+            );
+            dispatch(
+                setNewKeyFieldPath([]),
+            )
         }
     }
     return (

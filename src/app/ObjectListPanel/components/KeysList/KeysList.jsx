@@ -9,12 +9,13 @@ import ObjectTree from "../ObjectTree/ObjectTree";
 
 const KeysList = () => {
     const {
-        show: showNewField,
-        path: showNewFieldPath,
+        showNewField,
+        newFieldPath,
         parentObject,
     } = useSelector(
-        ({ parentObject, newKeyFieldState, selectedKey }) => ({
-            ...newKeyFieldState,
+        ({ parentObject, newKeyFieldState }) => ({
+            showNewField: newKeyFieldState.show,
+            newFieldPath: newKeyFieldState.path,
             parentObject,
         })
     );
@@ -62,10 +63,11 @@ const KeysList = () => {
                     <ObjectTree
                         key={current}
                         {...parentObject[current]}
+                        onBlurHandler={onBlurHandler}
                     />
                 ))}
             </List>
-            {showNewField && showNewFieldPath.length === 0 && (
+            {showNewField && newFieldPath.length === 0 && (
                 <TextField
                     placeholder="Add New Key Name"
                     autoFocus
