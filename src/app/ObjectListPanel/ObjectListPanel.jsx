@@ -1,6 +1,6 @@
 import React from 'react';
 import { Add, Delete, Redo, Undo } from '@mui/icons-material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, batch } from 'react-redux';
 import { setNewKeyFieldData } from '../../services/reduxStore/NewKeyFieldReducer';
 import { setSelectedKey } from '../../services/reduxStore/SelectedKeyReducer';
 import {
@@ -22,20 +22,22 @@ const ObjectListPanel = () => {
 
     const onClickHandler = (event) => {
         if (event.target.id === objectListContainerId) {
-            dispatch(
-                setSelectedKey({
-                    path: [],
-                })
-            );
-            if (currentPath.length !== 0) {
+            batch(() => {
                 dispatch(
-                    setNewKeyFieldData({
-                        show: false,
+                    setSelectedKey({
                         path: [],
-                        error: false,
-                    }),
+                    })
                 );
-            }
+                if (currentPath.length !== 0) {
+                    dispatch(
+                        setNewKeyFieldData({
+                            show: false,
+                            path: [],
+                            error: false,
+                        }),
+                    );
+                }
+            });
         }
     }
     return (

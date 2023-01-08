@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Icon, IconButton, List } from "@mui/material";
 import {
     TextField, ListItemText, ListItemButton,
 } from './ObjectTree.styles';
 import Types from '../../../../constants/PropertyTypes.enum';
 import { ArrowDropDown, Close } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
+import { batch, useDispatch, useSelector } from 'react-redux';
 import { setSelectedKey } from '../../../../services/reduxStore/SelectedKeyReducer';
 import { setNewKeyFieldData } from '../../../../services/reduxStore/NewKeyFieldReducer';
-import { setParentObjectData } from '../../../../services/reduxStore/ParentObjectStateReducer';
 
 const LeafTypeItem = (props) => {
     const {
@@ -21,19 +20,21 @@ const LeafTypeItem = (props) => {
     const selected = selectedKey.path.includes(keyName);
 
     const onClickHandler = () => {
-        dispatch(
-            setSelectedKey({
-                path: props.path,
-                keyName,
-            })
-        );
-        dispatch(
-            setNewKeyFieldData({
-                show: false,
-                error: false,
-                path: props.path.slice(0, props.path.length - 1),
-            })
-        );
+        batch(() => {
+            dispatch(
+                setSelectedKey({
+                    path: props.path,
+                    keyName,
+                })
+            );
+            dispatch(
+                setNewKeyFieldData({
+                    show: false,
+                    error: false,
+                    path: props.path.slice(0, props.path.length - 1),
+                })
+            );
+        });
     }
 
     return (
@@ -71,19 +72,21 @@ const NodeTypeItem = (props) => {
     const expanded = selectedKey.path.includes(keyName);
 
     const onClickHandler = () => {
-        dispatch(
-            setSelectedKey({
-                path: props.path,
-                keyName,
-            })
-        );
-        dispatch(
-            setNewKeyFieldData({
-                show: false,
-                error: false,
-                path: props.path,
-            })
-        );
+        batch(() => {
+            dispatch(
+                setSelectedKey({
+                    path: props.path,
+                    keyName,
+                })
+            );
+            dispatch(
+                setNewKeyFieldData({
+                    show: false,
+                    error: false,
+                    path: props.path,
+                })
+            );
+        });
     }
 
     const onCloseNewKeyField = () => {
