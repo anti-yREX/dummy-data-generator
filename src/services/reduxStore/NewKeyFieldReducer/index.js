@@ -5,6 +5,7 @@ export const newKeyFieldSlice = createSlice({
     initialState: {
         show: false,
         path: [],
+        error: false,
     },
     reducers: {
         setNewKeyFieldShow: (state, action) => {
@@ -13,10 +14,14 @@ export const newKeyFieldSlice = createSlice({
         setNewKeyFieldPath: (state, action) => {
             console.log('setNewKeyFieldPath', action.payload);
             state.path = action.payload;
-        }
+        },
+        setNewKeyFieldData: (state, action) => ({
+            ...state,
+            ...action.payload,
+        }),
     },
 })
 
-export const { setNewKeyFieldShow, setNewKeyFieldPath } = newKeyFieldSlice.actions;
+export const { setNewKeyFieldData } = newKeyFieldSlice.actions;
 
 export default newKeyFieldSlice.reducer;

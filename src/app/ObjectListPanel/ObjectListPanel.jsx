@@ -1,7 +1,7 @@
 import React from 'react';
 import { Add, Delete, Redo, Undo } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
-import { setNewKeyFieldShow, setNewKeyFieldPath } from '../../services/reduxStore/NewKeyFieldReducer';
+import { setNewKeyFieldData } from '../../services/reduxStore/NewKeyFieldReducer';
 import { setSelectedKey } from '../../services/reduxStore/SelectedKeyReducer';
 import {
     Wrapper,
@@ -14,8 +14,8 @@ import KeysList from './components/KeysList/KeysList';
 const objectListContainerId = 'object-list-container';
 
 const ObjectListPanel = () => {
-    const selectedKey = useSelector(
-        ({ selectedKey }) => (selectedKey)
+    const {selectedKey, currentPath} = useSelector(
+        ({ selectedKey, newKeyFieldState }) => ({selectedKey, currentPath: newKeyFieldState.path})
     );
     const dispatch = useDispatch();
     const selected = selectedKey === null || selectedKey?.path?.length === 0;
@@ -27,16 +27,22 @@ const ObjectListPanel = () => {
                     path: [],
                 })
             );
-            dispatch(
-                setNewKeyFieldPath([]),
-            )
+            if (currentPath.length !== 0) {
+                dispatch(
+                    setNewKeyFieldData({
+                        show: false,
+                        path: [],
+                        error: false,
+                    }),
+                );
+            }
         }
     }
     return (
         <Wrapper>
             <ButtonWrapper>
                 <StyledIconButton
-                    onClick={() => dispatch(setNewKeyFieldShow(true))}
+                    onClick={() => dispatch(setNewKeyFieldData({ show: true }))}
                 >
                     <Add />
                 </StyledIconButton>

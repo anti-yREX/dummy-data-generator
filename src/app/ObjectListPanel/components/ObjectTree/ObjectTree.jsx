@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Icon, List } from "@mui/material";
+import { Icon, IconButton, List } from "@mui/material";
 import {
     TextField, ListItemText, ListItemButton,
 } from './ObjectTree.styles';
 import Types from '../../../../constants/PropertyTypes.enum';
-import { ArrowDropDown } from '@mui/icons-material';
+import { ArrowDropDown, Close } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedKey } from '../../../../services/reduxStore/SelectedKeyReducer';
-import { setNewKeyFieldShow, setNewKeyFieldPath } from '../../../../services/reduxStore/NewKeyFieldReducer';
+import { setNewKeyFieldData } from '../../../../services/reduxStore/NewKeyFieldReducer';
 import { setParentObjectData } from '../../../../services/reduxStore/ParentObjectStateReducer';
 
 const LeafTypeItem = (props) => {
-    const { keyName } = props;
+    const {
+        keyName,
+    } = props;
 
     const dispatch = useDispatch();
 
@@ -23,6 +25,13 @@ const LeafTypeItem = (props) => {
             setSelectedKey({
                 path: props.path,
                 keyName,
+            })
+        );
+        dispatch(
+            setNewKeyFieldData({
+                show: false,
+                error: false,
+                path: props.path.slice(0, props.path.length - 1),
             })
         );
     }
@@ -48,48 +57,16 @@ const NodeTypeItem = (props) => {
         keyName,
         children,
         path,
+        newKeyFieldProps,
     } = props;
-
-    const [showNewKeyError, setShowNewKeyError] = useState(false);
-
-    const onBlurHandler = (event) => {
-        const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
-
-        if (regex.test(event.target.value) && !parentObject[event.target.value]) {
-            // if (selectedKey && (selectedKey.type === 'object' || selectedKey.type === 'array')) {
-            //     const currentPath = selectedKey.path;
-            //     let lastObj = parentObject;
-            //     currentPath.forEach((current, index) => {
-            //         lastObj = lastObj[current].childern;
-            //     });
-            //     console.log(lastObj);
-            // } else {
-                dispatch(
-                    setParentObjectData({
-                        ...parentObject,
-                        [event.target.value]: {
-                            keyName: event.target.value,
-                            path: [event.target.value],
-                            type: Types.empty,
-                            isEmpty: true,
-                            children: {},
-                        },
-                    })
-                );
-            // }
-            dispatch(setNewKeyFieldShow(false));
-            setShowNewKeyError(false);
-        } else {
-            setShowNewKeyError(true);
-        }
-    };
 
     const dispatch = useDispatch();
 
-    const {selectedKey, newFieldPath, showNewField } = useSelector(({ selectedKey, newKeyFieldState }) => ({
+    const {selectedKey, newFieldPath, showNewField, showNewKeyError } = useSelector(({ selectedKey, newKeyFieldState }) => ({
         selectedKey,
         newFieldPath: newKeyFieldState.path,
         showNewField: newKeyFieldState.show,
+        showNewKeyError: newKeyFieldState.error,
     }));
     const expanded = selectedKey.path.includes(keyName);
 
@@ -101,11 +78,17 @@ const NodeTypeItem = (props) => {
             })
         );
         dispatch(
-            setNewKeyFieldPath(props.path)
+            setNewKeyFieldData({
+                show: false,
+                error: false,
+                path: props.path,
+            })
         );
     }
 
-    console.log({selectedKey, newFieldPath, showNewField });
+    const onCloseNewKeyField = () => {
+        dispatch(setNewKeyFieldData({ show: false, error: false }));
+    }
 
     return (
         <>
@@ -142,15 +125,23 @@ const NodeTypeItem = (props) => {
                         key={current}
                         keyName={current}
                         {...children[current]}
+                        newKeyFieldProps={newKeyFieldProps}
                     />
                 ))}
                 {showNewField && (newFieldPath === path) && (
                     <TextField
                         placeholder="Add New Key Name"
                         autoFocus
-                        onBlur={onBlurHandler}
+                        onBlur={newKeyFieldProps.onBlurHandler}
                         inputProps={{ maxLength: 50 }}
                         error={showNewKeyError}
+                        InputProps={{
+                            endAdornment: (
+                                <IconButton onClick={onCloseNewKeyField}>
+                                    <Close />
+                                </IconButton>
+                            )
+                        }}
                     />
                 )}
             </List>
@@ -161,12 +152,14 @@ const NodeTypeItem = (props) => {
 const ObjectTree = (props) => {
     const {
         type,
+        newKeyFieldProps,
     } = props;
 
     if (!(type === Types.object || type === Types.array)) {
         return (
             <LeafTypeItem
                 {...props}
+                newKeyFieldProps={newKeyFieldProps}
             />
         )
     }
@@ -174,6 +167,7 @@ const ObjectTree = (props) => {
     return (
         <NodeTypeItem
             {...props}
+            newKeyFieldProps={newKeyFieldProps}
         />
     );
 }

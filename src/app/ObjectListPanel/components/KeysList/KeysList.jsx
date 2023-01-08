@@ -1,60 +1,75 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { List, ListItemButton } from "@mui/material";
+import { IconButton, List, ListItemButton } from "@mui/material";
 import { TextField, ListItemText } from './KeysList.styles';
 import { setParentObjectData } from "../../../../services/reduxStore/ParentObjectStateReducer";
-import { setNewKeyFieldShow } from "../../../../services/reduxStore/NewKeyFieldReducer";
+import { setNewKeyFieldData } from "../../../../services/reduxStore/NewKeyFieldReducer";
 import Types from "../../../../constants/PropertyTypes.enum";
 import ObjectTree from "../ObjectTree/ObjectTree";
+import { Close } from "@mui/icons-material";
 
 const KeysList = () => {
     const {
         showNewField,
         newFieldPath,
+        showNewKeyError,
         parentObject,
     } = useSelector(
         ({ parentObject, newKeyFieldState }) => ({
             showNewField: newKeyFieldState.show,
             newFieldPath: newKeyFieldState.path,
+            showNewKeyError: newKeyFieldState.error,
             parentObject,
         })
     );
 
     const dispatch = useDispatch();
 
-    const [showNewKeyError, setShowNewKeyError] = useState(false);
-
-    const onBlurHandler = (event) => {
-        const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
-
-        if (regex.test(event.target.value) && !parentObject[event.target.value]) {
-            // if (selectedKey && (selectedKey.type === 'object' || selectedKey.type === 'array')) {
-            //     const currentPath = selectedKey.path;
-            //     let lastObj = parentObject;
-            //     currentPath.forEach((current, index) => {
-            //         lastObj = lastObj[current].childern;
-            //     });
-            //     console.log(lastObj);
-            // } else {
+    const onInputHandler = (event) => {
+        if (event.key === 'Enter') {
+            const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
+    
+            if (regex.test(event.target.value) && !parentObject[event.target.value]) {
+                // if (selectedKey && (selectedKey.type === 'object' || selectedKey.type === 'array')) {
+                //     const currentPath = selectedKey.path;
+                //     let lastObj = parentObject;
+                //     currentPath.forEach((current, index) => {
+                //         lastObj = lastObj[current].childern;
+                //     });
+                //     console.log(lastObj);
+                // } else {
+                    dispatch(
+                        setParentObjectData({
+                            ...parentObject,
+                            [event.target.value]: {
+                                keyName: event.target.value,
+                                path: [event.target.value],
+                                type: Types.empty,
+                                isEmpty: true,
+                                children: {},
+                            },
+                        })
+                    );
+                // }
                 dispatch(
-                    setParentObjectData({
-                        ...parentObject,
-                        [event.target.value]: {
-                            keyName: event.target.value,
-                            path: [event.target.value],
-                            type: Types.empty,
-                            isEmpty: true,
-                            children: {},
-                        },
-                    })
+                    setNewKeyFieldData({
+                        show: false,
+                        error: false,
+                    }),
                 );
-            // }
-            dispatch(setNewKeyFieldShow(false));
-            setShowNewKeyError(false);
-        } else {
-            setShowNewKeyError(true);
+            } else {
+                dispatch(
+                    setNewKeyFieldData({
+                        error: true,
+                    }),
+                );
+            }
         }
     };
+
+    const onCloseNewKeyField = () => {
+        dispatch(setNewKeyFieldData({ show: false, error: false }));
+    }
 
     return (
         <div>
@@ -63,7 +78,10 @@ const KeysList = () => {
                     <ObjectTree
                         key={current}
                         {...parentObject[current]}
-                        onBlurHandler={onBlurHandler}
+                        newKeyFieldProps={{
+                            onBlurHandler: onInputHandler,
+                            onCloseNewKeyField,
+                        }}
                     />
                 ))}
             </List>
@@ -71,9 +89,16 @@ const KeysList = () => {
                 <TextField
                     placeholder="Add New Key Name"
                     autoFocus
-                    onBlur={onBlurHandler}
+                    onKeyPress={onInputHandler}
                     inputProps={{ maxLength: 50 }}
                     error={showNewKeyError}
+                    InputProps={{
+                        endAdornment: (
+                            <IconButton onClick={onCloseNewKeyField}>
+                                <Close />
+                            </IconButton>
+                        ),
+                    }}
                 />
             )}
         </div>
