@@ -7,6 +7,7 @@ import { setNewKeyFieldData } from "../../../../services/reduxStore/NewKeyFieldR
 import Types from "../../../../constants/PropertyTypes.enum";
 import ObjectTree from "../ObjectTree/ObjectTree";
 import { Close } from "@mui/icons-material";
+import { cloneDeep } from "lodash";
 
 const KeysList = () => {
     const {
@@ -14,12 +15,18 @@ const KeysList = () => {
         newFieldPath,
         showNewKeyError,
         parentObject,
+        selectedKey,
     } = useSelector(
-        ({ parentObject, newKeyFieldState }) => ({
+        ({
+            parentObject,
+            newKeyFieldState,
+            selectedKey,
+        }) => ({
             showNewField: newKeyFieldState.show,
             newFieldPath: newKeyFieldState.path,
             showNewKeyError: newKeyFieldState.error,
             parentObject,
+            selectedKey,
         })
     );
 
@@ -29,42 +36,98 @@ const KeysList = () => {
         if (event.key === 'Enter') {
             const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
     
-            if (regex.test(event.target.value) && !parentObject[event.target.value]) {
+            if (regex.test(event.target.value)) {
                 batch(() => {
-                    // if (selectedKey && (selectedKey.type === 'object' || selectedKey.type === 'array')) {
-                    //     const currentPath = selectedKey.path;
-                    //     let lastObj = parentObject;
-                    //     currentPath.forEach((current, index) => {
-                    //         lastObj = lastObj[current].childern;
-                    //     });
-                    //     console.log(lastObj);
-                    // } else {
+                    let success = false;
+                    if (selectedKey?.path.length !== 0) {
+                        const currentPath = selectedKey.path;
+                        const newParentObj = cloneDeep(parentObject);
+                        let lastObj = newParentObj;
+                        const key = currentPath[0];
+                        if (
+                            currentPath.length === 1 &&
+                            !(
+                                lastObj[key].type === Types.object ||
+                                lastObj[key].type === Types.array
+                            )
+                        ) {
+                            if (!newParentObj[event.target.value]) {
+                                dispatch(
+                                    setParentObjectData({
+                                        ...newParentObj,
+                                        [event.target.value]: {
+                                            keyName: event.target.value,
+                                            path: [event.target.value],
+                                            type: Types.empty,
+                                            isEmpty: true,
+                                            children: {},
+                                        },
+                                    })
+                                );
+                                success = true;
+                            }
+                        } else {
+                            currentPath.forEach((current, index) => {
+                                if (
+                                    index === 0
+                                ) {
+                                    lastObj = lastObj[current];
+                                } else if (
+                                    lastObj.children[current].type === Types.object ||
+                                    lastObj.children[current].type === Types.array
+                                ) {
+                                    lastObj = lastObj.children[current];
+                                }
+                            });
+                            if (!lastObj.children[event.target.value]) {
+                                lastObj.children = {
+                                    ...lastObj.children,
+                                    [event.target.value]: {
+                                        keyName: event.target.value,
+                                        path: [...currentPath, event.target.value],
+                                        type: Types.empty,
+                                        isEmpty: true,
+                                        children: {},
+                                    },
+                                }
+                                dispatch(
+                                    setParentObjectData(newParentObj)
+                                );
+                                success = true;
+                            }
+                        }
+                    } else {
+                        if (!parentObject[event.target.value]) {
+                            dispatch(
+                                setParentObjectData({
+                                    ...parentObject,
+                                    [event.target.value]: {
+                                        keyName: event.target.value,
+                                        path: [event.target.value],
+                                        type: Types.empty,
+                                        isEmpty: true,
+                                        children: {},
+                                    },
+                                })
+                            );
+                            success = true;
+                        }
+                    }
+                    if (success) {
                         dispatch(
-                            setParentObjectData({
-                                ...parentObject,
-                                [event.target.value]: {
-                                    keyName: event.target.value,
-                                    path: [event.target.value],
-                                    type: Types.empty,
-                                    isEmpty: true,
-                                    children: {},
-                                },
-                            })
+                            setNewKeyFieldData({
+                                show: false,
+                                error: false,
+                            }),
                         );
-                    // }
-                    dispatch(
-                        setNewKeyFieldData({
-                            show: false,
-                            error: false,
-                        }),
-                    );
+                    } else {
+                        dispatch(
+                            setNewKeyFieldData({
+                                error: true,
+                            }),
+                        );
+                    }
                 });
-            } else {
-                dispatch(
-                    setNewKeyFieldData({
-                        error: true,
-                    }),
-                );
             }
         }
     };
@@ -81,7 +144,7 @@ const KeysList = () => {
                         key={current}
                         {...parentObject[current]}
                         newKeyFieldProps={{
-                            onBlurHandler: onInputHandler,
+                            onInputHandler,
                             onCloseNewKeyField,
                         }}
                     />

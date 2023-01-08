@@ -17,7 +17,8 @@ export const ListItemButton = muiStyled(MuiListItemButton)({
 });
 
 export const TextField = muiStyled(TextFieldComponent)({
-    width: '100%',
+    margin: '6px',
+    width: 'calc(100% - 12px)',
 });
 
 export const Wrapper = styled.div``;

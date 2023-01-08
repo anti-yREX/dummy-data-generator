@@ -8,6 +8,7 @@ import { ArrowDropDown, Close } from '@mui/icons-material';
 import { batch, useDispatch, useSelector } from 'react-redux';
 import { setSelectedKey } from '../../../../services/reduxStore/SelectedKeyReducer';
 import { setNewKeyFieldData } from '../../../../services/reduxStore/NewKeyFieldReducer';
+import { isEqual } from 'lodash';
 
 const LeafTypeItem = (props) => {
     const {
@@ -25,6 +26,7 @@ const LeafTypeItem = (props) => {
                 setSelectedKey({
                     path: props.path,
                     keyName,
+                    type: props.type,
                 })
             );
             dispatch(
@@ -77,6 +79,7 @@ const NodeTypeItem = (props) => {
                 setSelectedKey({
                     path: props.path,
                     keyName,
+                    type: props.type,
                 })
             );
             dispatch(
@@ -131,11 +134,11 @@ const NodeTypeItem = (props) => {
                         newKeyFieldProps={newKeyFieldProps}
                     />
                 ))}
-                {showNewField && (newFieldPath === path) && (
+                {showNewField && isEqual(newFieldPath, path) && (
                     <TextField
                         placeholder="Add New Key Name"
                         autoFocus
-                        onBlur={newKeyFieldProps.onBlurHandler}
+                        onKeyPress={newKeyFieldProps.onInputHandler}
                         inputProps={{ maxLength: 50 }}
                         error={showNewKeyError}
                         InputProps={{
