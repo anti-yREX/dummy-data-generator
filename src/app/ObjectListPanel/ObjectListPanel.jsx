@@ -107,6 +107,13 @@ const ObjectListPanel = () => {
                 setSelectedKey(newSelectedKey)
             );
             dispatch(
+                setNewKeyFieldData({
+                    show: false,
+                    path: newSelectedKey.path,
+                    error: false,
+                }),
+            );
+            dispatch(
                 deleteKeyFromParentObj(targetPath)
             );
         });
