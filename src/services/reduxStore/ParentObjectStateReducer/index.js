@@ -63,7 +63,6 @@ export const parentObjectSlice = createSlice({
     },
     reducers: {
         setParentObjectData: (state, action) => {
-            console.log(state, action);
             return {
                 ...state,
                 ...action.payload,

@@ -11,6 +11,7 @@ import {
     StyledIconButton,
 } from './ObjectListPanel.styles';
 import KeysList from './components/KeysList/KeysList';
+import Types from '../../constants/PropertyTypes.enum';
 
 const objectListContainerId = 'object-list-container';
 
@@ -106,10 +107,11 @@ const ObjectListPanel = () => {
             dispatch(
                 setSelectedKey(newSelectedKey)
             );
+            const isLeafType = !(newSelectedKey.type === Types.object || newSelectedKey.type === Types.array);
             dispatch(
                 setNewKeyFieldData({
                     show: false,
-                    path: newSelectedKey.path,
+                    path: isLeafType ? newSelectedKey.path.slice(0, newSelectedKey.path.length - 1) : newSelectedKey.path,
                     error: false,
                 }),
             );

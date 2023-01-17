@@ -80,11 +80,15 @@ const KeysList = () => {
                                 }
                             });
                             if (!lastObj.children[event.target.value]) {
+                                const newPath = (selectedKey.type === Types.array || selectedKey.type === Types.object) ?
+                                    currentPath : currentPath.slice(0, currentPath.length - 1);
+                                console.log({ selectedKey, newPath });
+
                                 lastObj.children = {
                                     ...lastObj.children,
                                     [event.target.value]: {
                                         keyName: event.target.value,
-                                        path: [...currentPath, event.target.value],
+                                        path: [...newPath, event.target.value],
                                         type: Types.empty,
                                         isEmpty: true,
                                         children: {},
