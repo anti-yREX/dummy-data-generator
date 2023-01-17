@@ -12,7 +12,6 @@ export const newKeyFieldSlice = createSlice({
             state.show = action.payload;
         },
         setNewKeyFieldPath: (state, action) => {
-            console.log('setNewKeyFieldPath', action.payload);
             state.path = action.payload;
         },
         setNewKeyFieldData: (state, action) => ({
