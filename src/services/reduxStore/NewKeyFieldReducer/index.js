@@ -8,12 +8,6 @@ export const newKeyFieldSlice = createSlice({
         error: false,
     },
     reducers: {
-        setNewKeyFieldShow: (state, action) => {
-            state.show = action.payload;
-        },
-        setNewKeyFieldPath: (state, action) => {
-            state.path = action.payload;
-        },
         setNewKeyFieldData: (state, action) => ({
             ...state,
             ...action.payload,

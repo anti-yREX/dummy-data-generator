@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { batch, useDispatch, useSelector } from 'react-redux';
 import { IconButton, List } from "@mui/material";
 import { TextField } from './KeysList.styles';
