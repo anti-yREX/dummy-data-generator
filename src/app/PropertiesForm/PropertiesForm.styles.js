@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import { styled as muiStyled } from '@mui/system';
+import { TextField as MuiTextField } from '../../components/TextField';
 
 const Container = styled.div`
     border-radius: 16px;
     border: 4px solid black;
-    width: 30vw;
+    width: 100%;
     background: white;
     box-shadow: 0px 0px 22px grey;
-    height: calc(100% - 44px);
-    padding: 24px 0;
+    padding: 24px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -17,20 +17,12 @@ const ButtonWrapper = styled.div`
     padding-bottom: 4px;
 `;
 
-const Wrapper = styled.div`
-    margin-right: 24px;
-`;
-
-const StyledIconButton = muiStyled(IconButton)({
-    color: 'black',
-    '&.right-side': {
-        margin: '0 0 0 auto',
-    },
+const TextField = muiStyled(MuiTextField)({
+    width: '100%',
 });
 
 export {
-    Wrapper,
     Container,
     ButtonWrapper,
-    StyledIconButton,
+    TextField,
 };

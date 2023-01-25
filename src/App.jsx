@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from 'react-redux'
-import MainContent from "./components/MainContent";
+import MainContent from "./app/MainContent";
 import store from './services/reduxStore/store';
 
 // This component will contain all Provider Wrappers like:
