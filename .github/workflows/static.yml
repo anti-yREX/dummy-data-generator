@@ -19,4 +19,4 @@ jobs:
         env:
           MY_EMAIL: ritu.raj.ingale@gmail.com
           MY_NAME: anti-yREX
-        run: git config --global user.email $MY_EMAIL && git config --global user.name $MY_NAME && npm run deploy
+        run: git config --global user.email $MY_EMAIL && git config --global user.name $MY_NAME && git config -l && npm run deploy
