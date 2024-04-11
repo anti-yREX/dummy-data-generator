@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server .",
-    "build": "Webpack .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx webpack .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm run build && gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/yREX13th/dummy-data-generator/issues"
   },
-  "homepage": "https://github.com/yREX13th/dummy-data-generator#readme",
+  "homepage": "https://anti-yREX.github.io/dummy-data-generator",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.5",
