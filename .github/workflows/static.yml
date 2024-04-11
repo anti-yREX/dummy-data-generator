@@ -11,10 +11,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        
-      - name: show username
-        run: |
-          echo "hello: ${{ ghpages.HELLO }}"
 
       - name: Set remote URL for gh-pages branch
         run: |
