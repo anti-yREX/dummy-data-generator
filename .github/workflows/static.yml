@@ -1,0 +1,19 @@
+name: Check Main Branch and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-main-branch-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Build and deploy
+        run: npm run deploy
