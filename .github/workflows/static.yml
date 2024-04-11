@@ -12,11 +12,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         
-      - name: Set remote URL for gh-pages branch
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
+      - name: show username
         run: |
-          echo "Secret Value: ${{ secrets }}" |
+          echo "USERNAME: ${{ secrets.USERNAME }}"
+
+      - name: Set remote URL for gh-pages branch
+        run: |
           git remote set-url origin https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PAGES_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Configure git
