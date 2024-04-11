@@ -21,15 +21,10 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-      - name: Build and deploy
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
-
       - name: Install dependencies
         run: npm install --force
 
       - name: Build and deploy
         env:
-          MY_EMAIL: ritu.raj.ingale@gmail.com
-          MY_NAME: anti-yREX
-        run: git config --global user.email $MY_EMAIL && git config --global user.name $MY_NAME && git config -l && npm run deploy
+          GH_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
+        run: git config -l && npm run deploy
