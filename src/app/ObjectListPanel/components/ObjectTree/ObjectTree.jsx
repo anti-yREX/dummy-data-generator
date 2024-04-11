@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon, IconButton, List } from "@mui/material";
 import {
     TextField, ListItemText, ListItemButton,
@@ -71,7 +71,7 @@ const NodeTypeItem = (props) => {
         showNewField: newKeyFieldState.show,
         showNewKeyError: newKeyFieldState.error,
     }));
-    const expanded = selectedKey.path.includes(keyName);
+    const [expanded, setExpanded] = useState(selectedKey.path.includes(keyName))
 
     const onClickHandler = () => {
         batch(() => {
@@ -90,6 +90,7 @@ const NodeTypeItem = (props) => {
                 })
             );
         });
+        setExpanded(prev => !prev);
     }
 
     const onCloseNewKeyField = () => {
