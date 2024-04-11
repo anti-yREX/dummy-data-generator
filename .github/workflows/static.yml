@@ -14,7 +14,7 @@ jobs:
         
       - name: show username
         run: |
-          echo "USERNAME: ${{ secrets.USERNAME }}"
+          echo "hello: ${{ ghpages.HELLO }}"
 
       - name: Set remote URL for gh-pages branch
         run: |
