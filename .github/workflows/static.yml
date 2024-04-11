@@ -16,6 +16,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
         run: |
+          echo "Secret Value: ${{ secrets }}" |
           git remote set-url origin https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PAGES_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Configure git
