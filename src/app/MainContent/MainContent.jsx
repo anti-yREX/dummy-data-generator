@@ -1,13 +1,22 @@
 import React from "react";
-import MainContentWrapper from './MainContent.styles';
+import {
+    MainContentWrapper,
+    FlexWrapper,
+    TitleWrapper,
+} from './MainContent.styles';
 import ObjectListPanel from "../ObjectListPanel";
 import PropertiesForm from "../PropertiesForm";
 
 const MainContent = () => {
     return (
         <MainContentWrapper>
-            <ObjectListPanel />
-            <PropertiesForm />
+            <TitleWrapper>
+                Dummy Data Creator
+            </TitleWrapper>
+            <FlexWrapper>
+                <ObjectListPanel />
+                <PropertiesForm />
+            </FlexWrapper>
         </MainContentWrapper>
     );
 }
